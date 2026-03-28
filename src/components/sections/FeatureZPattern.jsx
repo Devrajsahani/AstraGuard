@@ -134,7 +134,7 @@ function TaxVisual() {
   }, [])
 
   return (
-    <div style={{ width: '100%', height: '100%', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'linear-gradient(135deg, #0E0E12 0%, #080809 100%)' }}>
+    <div style={{ width: '100%', height: '100%', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'linear-gradient(135deg, #161a22 0%, #12151b 100%)' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
         {/* Header */}
         <div>
@@ -224,7 +224,7 @@ function MFVisual() {
   }, [])
 
   return (
-    <div style={{ width: '100%', height: '100%', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0A0A0C' }}>
+    <div style={{ width: '100%', height: '100%', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'linear-gradient(135deg, #161a22 0%, #12151b 100%)' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
@@ -473,29 +473,33 @@ function FeatureRow({ feature, isReversed }) {
             flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '48px',
           }}>
-            <div style={{
-              width: '100%', maxWidth: '460px',
-              borderRadius: '24px', overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.04)',
-              boxShadow: '0 24px 70px rgba(0,0,0,0.7)',
-              background: '#0B0B0C',
-            }}>
-              {/* Minimal toolbar - no separator line (border removed) */}
+            <div style={{ position: 'relative', width: '100%', maxWidth: '460px' }}>
               <div style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '14px 22px',
-                background: '#0C0C0E',
+                position: 'absolute', inset: '-20px', borderRadius: '40px',
+                background: 'radial-gradient(ellipse at 50% 40%, rgba(69,162,158,0.15) 0%, rgba(69,162,158,0.05) 50%, transparent 75%)',
+                filter: 'blur(20px)', pointerEvents: 'none', zIndex: 0,
+              }} />
+              <div style={{
+                position: 'relative', zIndex: 1,
+                width: '100%',
+                borderRadius: '20px', overflow: 'hidden',
+                border: '1px solid rgba(69,162,158,0.15)',
+                boxShadow: '0 4px 40px rgba(69,162,158,0.08), 0 24px 70px rgba(0,0,0,0.5)',
+                background: 'linear-gradient(180deg, #151820 0%, #111418 50%, #0e1014 100%)',
               }}>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                  padding: '14px 20px',
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)',
+                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                }}>
+                  <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#FF5F57', boxShadow: 'inset 0 -1px 2px rgba(0,0,0,0.2)' }} />
+                  <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#FEBC2E', boxShadow: 'inset 0 -1px 2px rgba(0,0,0,0.2)' }} />
+                  <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#28C840', boxShadow: 'inset 0 -1px 2px rgba(0,0,0,0.2)' }} />
                 </div>
-              </div>
-
-              {/* Canvas content */}
-              <div style={{ background: 'transparent' }}>
-                <VisualComponent />
+                <div style={{ background: 'transparent' }}>
+                  <VisualComponent />
+                </div>
               </div>
             </div>
           </div>
