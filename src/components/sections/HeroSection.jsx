@@ -111,8 +111,8 @@ export default function HeroSection() {
             Start
           </span>
           <span
-            className="italic ml-[0.3em] text-[#061745]"
-            style={{ fontFamily: "'Instrument Serif', serif" }}
+            className="italic ml-[0.3em]"
+            style={{ fontFamily: "'Instrument Serif', serif", background: 'linear-gradient(135deg, #45A29E 0%, #66d9d0 50%, #45A29E 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
           >
             Guarding.
           </span>
@@ -140,15 +140,31 @@ export default function HeroSection() {
           {/* Primary */}
           <Link
             to="/onboard"
-            className="bg-[#F5A623] text-black font-bold rounded-full px-8 py-4 flex items-center gap-2 hover:opacity-90 transition-opacity"
+            className="font-bold rounded-full flex items-center hover:opacity-90 transition-all duration-200"
+            style={{
+              padding: '16px 36px', gap: 10,
+              background: 'linear-gradient(135deg, #45A29E 0%, #3d9490 100%)',
+              color: 'white', fontSize: 15, textDecoration: 'none',
+              boxShadow: '0 0 30px rgba(69,162,158,0.25), 0 8px 24px rgba(0,0,0,0.3)',
+              border: '1px solid rgba(69,162,158,0.4)',
+            }}
           >
             Extract Financial DNA
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight style={{ width: 18, height: 18 }} />
           </Link>
 
           {/* Secondary */}
-          <button className="group flex items-center gap-3 px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105 cursor-pointer">
-            <Play className="w-5 h-5" />
+          <button
+            className="group flex items-center cursor-pointer transition-all duration-200 hover:bg-white/[0.08]"
+            style={{
+              padding: '16px 32px', gap: 12,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: 100, color: 'white', fontWeight: 600, fontSize: 15,
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <Play style={{ width: 18, height: 18 }} />
             <span style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
               See Features
             </span>
