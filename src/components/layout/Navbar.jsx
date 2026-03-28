@@ -21,7 +21,7 @@ const links = [
 export default function Navbar() {
   return (
     <nav
-      className="absolute top-0 left-0 right-0 z-50 w-full flex flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-6 md:py-8 pointer-events-auto text-[19px] mt-[25px] mb-[25px]"
+      className="absolute top-0 left-0 right-0 z-50 w-full flex flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-6 md:py-8 pointer-events-auto text-[19px] mt-[22px] mb-[22px]"
       aria-label="Primary"
     >
       {links.map(({ to, label, end }) => (
