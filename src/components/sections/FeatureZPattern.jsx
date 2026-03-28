@@ -353,14 +353,24 @@ function FeatureRow({ feature, isReversed }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '60px 24px',
     }}>
-      {/* Full-page glassmorphism card */}
+      {/* Outer glow behind the card */}
       <div style={{
         position: 'relative', width: '92%', maxWidth: '1600px',
+      }}>
+        <div style={{
+          position: 'absolute', inset: '-40px', borderRadius: '60px',
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(69,162,158,0.12) 0%, rgba(69,162,158,0.04) 40%, transparent 70%)',
+          filter: 'blur(30px)', pointerEvents: 'none', zIndex: 0,
+        }} />
+
+      {/* Full-page glassmorphism card */}
+      <div style={{
+        position: 'relative', width: '100%',
         minHeight: '82vh', borderRadius: '32px', overflow: 'hidden',
-        border: '1px solid rgba(255,255,255,0.03)',
-        background: '#090A0E',
-        boxShadow: '0 30px 80px rgba(0,0,0,0.5)',
-        display: 'flex', flexDirection: 'column',
+        border: '1px solid rgba(69,162,158,0.12)',
+        background: 'linear-gradient(135deg, #10121a 0%, #0c0e14 50%, #0a0b10 100%)',
+        boxShadow: '0 0 60px rgba(69,162,158,0.06), 0 30px 80px rgba(0,0,0,0.5)',
+        display: 'flex', flexDirection: 'column', zIndex: 1,
       }}>
         {/* Corner glow — teal accent */}
         <div style={{
@@ -489,6 +499,7 @@ function FeatureRow({ feature, isReversed }) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
