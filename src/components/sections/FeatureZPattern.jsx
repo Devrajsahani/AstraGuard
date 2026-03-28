@@ -349,157 +349,97 @@ function FeatureRow({ feature, isReversed }) {
 
   return (
     <div style={{
-      minHeight: '100svh', width: '100%',
+      width: '100%',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '60px 24px',
+      padding: '40px 24px',
     }}>
-      {/* Outer glow behind the card */}
-      <div style={{
-        position: 'relative', width: '92%', maxWidth: '1600px',
-      }}>
+      <div style={{ position: 'relative', width: '92%', maxWidth: '1600px' }}>
+        {/* Outer ambient glow */}
         <div style={{
-          position: 'absolute', inset: '-40px', borderRadius: '60px',
-          background: 'radial-gradient(ellipse at 50% 50%, rgba(69,162,158,0.12) 0%, rgba(69,162,158,0.04) 40%, transparent 70%)',
-          filter: 'blur(30px)', pointerEvents: 'none', zIndex: 0,
+          position: 'absolute', inset: '-50px', borderRadius: '70px',
+          background: 'radial-gradient(ellipse at 50% 60%, rgba(69,162,158,0.10) 0%, transparent 60%)',
+          filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0,
         }} />
 
-      {/* Full-page glassmorphism card */}
-      <div style={{
-        position: 'relative', width: '100%',
-        minHeight: '82vh', borderRadius: '32px', overflow: 'hidden',
-        border: '1px solid rgba(69,162,158,0.12)',
-        background: 'linear-gradient(135deg, #10121a 0%, #0c0e14 50%, #0a0b10 100%)',
-        boxShadow: '0 0 60px rgba(69,162,158,0.06), 0 30px 80px rgba(0,0,0,0.5)',
-        display: 'flex', flexDirection: 'column', zIndex: 1,
-      }}>
-        {/* Corner glow — teal accent */}
+        {/* Card */}
         <div style={{
-          position: 'absolute', pointerEvents: 'none',
-          width: '800px', height: '800px',
-          filter: 'blur(180px)', opacity: 0.12,
-          background: 'radial-gradient(circle, rgba(69,162,158,0.5) 0%, rgba(69,162,158,0.1) 50%, transparent 80%)',
-          ...(isReversed
-            ? { bottom: '-200px', left: '-200px' }
-            : { top: '-200px', right: '-200px' }
-          ),
-        }} />
-        <div style={{
-          position: 'absolute', pointerEvents: 'none',
-          width: '600px', height: '600px',
-          filter: 'blur(140px)', opacity: 0.15,
-          background: THEME_BLUE,
-          ...(isReversed
-            ? { top: '-150px', right: '-150px' }
-            : { bottom: '-150px', left: '-150px' }
-          ),
-        }} />
-
-        {/* Content row - NO separator line between sides */}
-        <div style={{
-          position: 'relative', zIndex: 10, flex: 1,
-          display: 'flex',
-          flexDirection: isReversed ? 'row-reverse' : 'row',
-          alignItems: 'stretch',
+          position: 'relative', width: '100%',
+          borderRadius: '28px', overflow: 'hidden',
+          border: '1px solid rgba(69,162,158,0.15)',
+          background: 'linear-gradient(180deg, #111318 0%, #0c0e14 100%)',
+          boxShadow: '0 0 80px rgba(69,162,158,0.05), 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04)',
+          zIndex: 1,
         }}>
-
-          {/* TEXT SIDE - massive padding to keep content away from edges */}
+          {/* Top edge highlight line */}
           <div style={{
-            flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            paddingTop: '80px', paddingBottom: '80px',
-            paddingLeft: isReversed ? '60px' : '120px',
-            paddingRight: isReversed ? '120px' : '60px',
-            position: 'relative',
+            position: 'absolute', top: 0, left: '10%', right: '10%', height: 1,
+            background: 'linear-gradient(90deg, transparent, rgba(69,162,158,0.3), transparent)',
+            zIndex: 20,
+          }} />
+
+          {/* Corner glow */}
+          <div style={{
+            position: 'absolute', pointerEvents: 'none', zIndex: 0,
+            width: '600px', height: '600px',
+            filter: 'blur(160px)', opacity: 0.08,
+            background: 'radial-gradient(circle, rgba(69,162,158,0.6) 0%, transparent 70%)',
+            ...(isReversed
+              ? { bottom: '-100px', left: '-100px' }
+              : { top: '-100px', right: '-100px' }
+            ),
+          }} />
+
+          {/* Text section at top */}
+          <div style={{
+            position: 'relative', zIndex: 10,
+            padding: '56px 64px 40px',
           }}>
-            {/* Teal gradient glow behind text */}
-            <div style={{
-              position: 'absolute', top: '40%', left: '45%',
-              transform: 'translate(-50%, -50%)',
-              width: '500px', height: '500px', borderRadius: '50%',
-              filter: 'blur(140px)', pointerEvents: 'none',
-              opacity: 0.18, background: 'radial-gradient(circle, rgba(69,162,158,0.6) 0%, rgba(69,162,158,0.15) 50%, transparent 80%)', zIndex: -1,
-            }} />
-            <div style={{
-              position: 'absolute', top: '55%', left: '30%',
-              transform: 'translate(-50%, -50%)',
-              width: '300px', height: '300px', borderRadius: '50%',
-              filter: 'blur(100px)', pointerEvents: 'none',
-              opacity: 0.1, background: THEME_BLUE, zIndex: -1,
-            }} />
+            <h3 style={{
+              fontSize: 'clamp(32px, 3.5vw, 48px)', fontWeight: 600,
+              lineHeight: 1.1, letterSpacing: '-0.02em',
+              color: 'white', margin: 0, marginBottom: 16,
+            }}>
+              {feature.title}{' '}
+              <span style={{ fontWeight: 700 }}>{feature.titleSuffix}</span>
+            </h3>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-              <h3 style={{
-                fontSize: 'clamp(42px, 5vw, 72px)', fontWeight: 500,
-                lineHeight: 1.05, letterSpacing: '-0.03em',
-                color: 'rgba(255,255,255,0.95)', margin: 0,
-              }}>
-                {feature.title}<br />
-                <span style={{ fontWeight: 700, color: 'white' }}>{feature.titleSuffix}</span>
-              </h3>
-
-              <p style={{
-                fontSize: 'clamp(16px, 1.2vw, 20px)', lineHeight: 1.65,
-                color: 'rgba(255,255,255,0.38)', fontWeight: 300,
-                maxWidth: '480px', letterSpacing: '0.01em', margin: 0,
-              }}>
-                {feature.description}
-              </p>
-
-              <div style={{ paddingTop: '12px' }}>
-                <a
-                  href={feature.link}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '10px',
-                    padding: '10px 22px', borderRadius: '100px',
-                    fontSize: '13px', fontWeight: 500,
-                    border: '1px solid rgba(6,23,69,0.4)',
-                    background: 'rgba(6,23,69,0.12)',
-                    color: 'rgba(120,160,255,0.8)',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,23,69,0.25)'; e.currentTarget.style.borderColor = 'rgba(6,23,69,0.6)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,23,69,0.12)'; e.currentTarget.style.borderColor = 'rgba(6,23,69,0.4)'; }}
-                >
-                  <span>Explore {feature.badge.split(' ')[0]}</span>
-                  <ArrowRight style={{ width: '14px', height: '14px', opacity: 0.7 }} />
-                </a>
-              </div>
-            </div>
+            <p style={{
+              fontSize: 'clamp(15px, 1.1vw, 18px)', lineHeight: 1.7,
+              color: 'rgba(255,255,255,0.4)', fontWeight: 400,
+              maxWidth: '600px', margin: 0,
+            }}>
+              {feature.description}
+            </p>
           </div>
 
-          {/* VISUAL SIDE - seamless background, no divider line */}
+          {/* Visual section below */}
           <div style={{
-            flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '48px',
+            position: 'relative', zIndex: 10,
+            padding: '0 64px 56px',
           }}>
             <div style={{
-              width: '100%', maxWidth: '460px',
-              borderRadius: '24px', overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.04)',
-              boxShadow: '0 24px 70px rgba(0,0,0,0.7)',
-              background: '#0B0B0C',
+              width: '100%',
+              borderRadius: '20px', overflow: 'hidden',
+              border: '1px solid rgba(255,255,255,0.06)',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+              background: '#0A0A0C',
             }}>
-              {/* Minimal toolbar - no separator line (border removed) */}
+              {/* Toolbar dots */}
               <div style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                display: 'flex', alignItems: 'center', gap: 6,
                 padding: '14px 22px',
                 background: '#0C0C0E',
+                borderBottom: '1px solid rgba(255,255,255,0.04)',
               }}>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
-                </div>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
               </div>
 
-              {/* Canvas content */}
-              <div style={{ background: 'transparent' }}>
-                <VisualComponent />
-              </div>
+              <VisualComponent />
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   )
