@@ -18,15 +18,20 @@ function ScrollReveal({ children, delay = 0 }) {
 
     const check = () => {
       const rect = el.getBoundingClientRect()
-      const inView = rect.top < window.innerHeight - 60 && rect.bottom > 60
+      const vh = window.innerHeight || document.documentElement.clientHeight
+      const inView = rect.top < vh - 40 && rect.bottom > 40
       setVisible(inView)
     }
 
     check()
-    window.addEventListener('scroll', check, { passive: true })
+    const t = setInterval(check, 150)
+    window.addEventListener('scroll', check, { passive: true, capture: true })
+    document.addEventListener('scroll', check, { passive: true, capture: true })
     window.addEventListener('resize', check, { passive: true })
     return () => {
-      window.removeEventListener('scroll', check)
+      clearInterval(t)
+      window.removeEventListener('scroll', check, { capture: true })
+      document.removeEventListener('scroll', check, { capture: true })
       window.removeEventListener('resize', check)
     }
   }, [])
@@ -116,7 +121,7 @@ function FloatingDots() {
 
 export default function LandingPage() {
   return (
-    <main className="relative min-h-screen bg-void w-full overflow-hidden">
+    <main className="relative min-h-screen bg-void w-full" style={{ overflowX: 'hidden' }}>
       {/* Galactic Space Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Subtle moving grid base */}
