@@ -15,12 +15,20 @@ function ScrollReveal({ children, delay = 0 }) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
+
+    const check = () => {
+      const rect = el.getBoundingClientRect()
+      const inView = rect.top < window.innerHeight - 60 && rect.bottom > 60
+      setVisible(inView)
+    }
+
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+    }
   }, [])
 
   return (
