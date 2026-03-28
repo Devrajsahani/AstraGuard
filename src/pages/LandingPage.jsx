@@ -1,11 +1,42 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import HeroSection from '../components/sections/HeroSection'
 import PerspectiveGrid from '../components/sections/PerspectiveGrid'
 import AgentShowcase from '../components/sections/AgentShowcase'
 import FeatureZPattern from '../components/sections/FeatureZPattern'
 import PanicIntercept from '../components/sections/PanicIntercept'
 import BehavioralFinale from '../components/sections/BehavioralFinale'
+import Testimonials from '../components/sections/Testimonials'
 import Navbar from '../components/layout/Navbar'
+
+function ScrollReveal({ children, delay = 0 }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(50px)',
+        transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+        willChange: 'opacity, transform',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
 
 function FloatingDots() {
   const canvasRef = useRef(null)
@@ -99,24 +130,35 @@ export default function LandingPage() {
         <Navbar />
         <HeroSection />
 
-        {/* Architecture grid separator */}
-        <PerspectiveGrid />
+        <ScrollReveal>
+          <PerspectiveGrid />
+        </ScrollReveal>
 
-        <AgentShowcase />
+        <ScrollReveal>
+          <AgentShowcase />
+        </ScrollReveal>
 
-        {/* Core Engines grid separator */}
-        <PerspectiveGrid
-          badge="Core Engines"
-          title="Three Engines."
-          highlightWord="Zero Guesswork."
-          titleSuffix=""
-          subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
-        />
+        <ScrollReveal>
+          <PerspectiveGrid
+            badge="Core Engines"
+            title="Three Engines."
+            highlightWord="Zero Guesswork."
+            titleSuffix=""
+            subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
+          />
+        </ScrollReveal>
 
-        <FeatureZPattern />
+        <ScrollReveal>
+          <FeatureZPattern />
+        </ScrollReveal>
 
-        {/* Behavioral Finale — scroll-driven panic intercept */}
-        <BehavioralFinale />
+        <ScrollReveal>
+          <BehavioralFinale />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Testimonials />
+        </ScrollReveal>
       </div>
     </main>
   )
