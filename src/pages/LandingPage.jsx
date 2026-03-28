@@ -1,55 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import HeroSection from '../components/sections/HeroSection'
 import PerspectiveGrid from '../components/sections/PerspectiveGrid'
 import AgentShowcase from '../components/sections/AgentShowcase'
 import FeatureZPattern from '../components/sections/FeatureZPattern'
 import PanicIntercept from '../components/sections/PanicIntercept'
 import BehavioralFinale from '../components/sections/BehavioralFinale'
-import Testimonials from '../components/sections/Testimonials'
 import Navbar from '../components/layout/Navbar'
-
-function ScrollReveal({ children, delay = 0 }) {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const check = () => {
-      const rect = el.getBoundingClientRect()
-      const vh = window.innerHeight || document.documentElement.clientHeight
-      const inView = rect.top < vh - 40 && rect.bottom > 40
-      setVisible(inView)
-    }
-
-    check()
-    const t = setInterval(check, 150)
-    window.addEventListener('scroll', check, { passive: true, capture: true })
-    document.addEventListener('scroll', check, { passive: true, capture: true })
-    window.addEventListener('resize', check, { passive: true })
-    return () => {
-      clearInterval(t)
-      window.removeEventListener('scroll', check, { capture: true })
-      document.removeEventListener('scroll', check, { capture: true })
-      window.removeEventListener('resize', check)
-    }
-  }, [])
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(50px)',
-        transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
-        willChange: 'opacity, transform',
-      }}
-    >
-      {children}
-    </div>
-  )
-}
 
 function FloatingDots() {
   const canvasRef = useRef(null)
@@ -124,7 +80,6 @@ export default function LandingPage() {
     <main className="relative min-h-screen bg-void w-full" style={{ overflowX: 'hidden' }}>
       {/* Galactic Space Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* Subtle moving grid base */}
         <div 
           className="absolute inset-0 opacity-[0.06]" 
           style={{
@@ -132,7 +87,6 @@ export default function LandingPage() {
             backgroundSize: '40px 40px'
           }}
         />
-        {/* Deep radial gradient vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0B0C10_100%)] opacity-80" />
       </div>
 
@@ -143,35 +97,21 @@ export default function LandingPage() {
         <Navbar />
         <HeroSection />
 
-        <ScrollReveal>
-          <PerspectiveGrid />
-        </ScrollReveal>
+        <PerspectiveGrid />
 
-        <ScrollReveal>
-          <AgentShowcase />
-        </ScrollReveal>
+        <AgentShowcase />
 
-        <ScrollReveal>
-          <PerspectiveGrid
-            badge="Core Engines"
-            title="Three Engines."
-            highlightWord="Zero Guesswork."
-            titleSuffix=""
-            subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
-          />
-        </ScrollReveal>
+        <PerspectiveGrid
+          badge="Core Engines"
+          title="Three Engines."
+          highlightWord="Zero Guesswork."
+          titleSuffix=""
+          subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
+        />
 
-        <ScrollReveal>
-          <FeatureZPattern />
-        </ScrollReveal>
+        <FeatureZPattern />
 
-        <ScrollReveal>
-          <BehavioralFinale />
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <Testimonials />
-        </ScrollReveal>
+        <BehavioralFinale />
       </div>
     </main>
   )
