@@ -9,104 +9,106 @@ gsap.registerPlugin(ScrollTrigger)
 function PhoneScreen() {
   return (
     <div className="absolute inset-0 bg-black overflow-hidden w-full h-full">
-      {/* ─ Status Bar ─ */}
-      <div className="absolute top-0 left-0 right-0 h-14 flex items-center justify-between px-8 pt-5 bg-transparent z-20">
-        <span className="text-[10px] text-white/50 font-semibold tracking-wide">9:41</span>
-        <div className="flex items-center gap-1">
-          <div className="w-5 h-2.5 rounded-sm border border-white/30 p-[1px]">
-            <div className="w-2/3 h-full bg-[#45f3ff] rounded-[1px]" />
+      {/* Status Bar */}
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between bg-transparent z-20"
+        style={{ height: 48, padding: '18px 24px 0' }}>
+        <span className="text-white/50 font-semibold" style={{ fontSize: 10, letterSpacing: '0.05em' }}>9:41</span>
+        <div className="flex items-center" style={{ gap: 4 }}>
+          <div className="rounded-sm border border-white/30" style={{ width: 20, height: 10, padding: 1 }}>
+            <div className="h-full bg-[#45f3ff] rounded-[1px]" style={{ width: '66%' }} />
           </div>
         </div>
       </div>
 
-      {/* ─ Main Content Area ─ */}
-      <div className="absolute top-14 left-0 right-0 bottom-6 px-6 flex flex-col z-10">
-        {/* ─ Portfolio Header ─ */}
-        <div className="pt-2 pb-4">
-          <p className="text-[10px] text-text-slate tracking-widest uppercase font-medium">Portfolio Value</p>
-          <div className="flex items-baseline gap-2 mt-1">
-            <span className="phone-portfolio-value text-[26px] font-bold text-white tracking-tight">₹24,85,200</span>
+      {/* Main Content */}
+      <div className="absolute left-0 right-0 bottom-0 flex flex-col z-10"
+        style={{ top: 48, padding: '0 20px 20px', overflow: 'hidden' }}>
+
+        {/* Portfolio Header */}
+        <div style={{ padding: '8px 0 12px' }}>
+          <p className="text-[#94A3B8] uppercase font-medium" style={{ fontSize: 9, letterSpacing: '0.12em' }}>Portfolio Value</p>
+          <span className="phone-portfolio-value font-bold text-white" style={{ fontSize: 22 }}>₹24,85,200</span>
+        </div>
+
+        {/* Chart */}
+        <div className="flex-shrink-0" style={{ paddingBottom: 10 }}>
+          <div className="bg-white/[0.03] rounded-xl" style={{ padding: '12px 14px' }}>
+            <div className="flex items-center justify-between" style={{ marginBottom: 6 }}>
+              <span className="font-semibold text-white/80" style={{ fontSize: 10 }}>NIFTY 50</span>
+              <span className="phone-nifty-badge text-red-400 font-bold flex items-center" style={{ fontSize: 10, gap: 3 }}>
+                <TrendingDown style={{ width: 12, height: 12 }} />
+                <span className="phone-nifty-pct">-7.2%</span>
+              </span>
+            </div>
+            <svg viewBox="0 0 220 55" className="w-full phone-chart-svg" style={{ height: 44 }}>
+              <defs>
+                <linearGradient id="crashGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgba(239,68,68,0.25)" />
+                  <stop offset="100%" stopColor="rgba(239,68,68,0)" />
+                </linearGradient>
+              </defs>
+              <path className="phone-chart-line"
+                d="M0,12 C20,10 35,8 50,11 C65,14 80,16 100,22 C120,28 140,35 160,42 C180,48 200,52 220,54"
+                fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
+              <path className="phone-chart-fill"
+                d="M0,12 C20,10 35,8 50,11 C65,14 80,16 100,22 C120,28 140,35 160,42 C180,48 200,52 220,54 L220,55 L0,55 Z"
+                fill="url(#crashGrad)" />
+            </svg>
+            <div className="flex items-center justify-between" style={{ marginTop: 4 }}>
+              <span className="text-[#94A3B8]" style={{ fontSize: 8 }}>Intraday · 3:45 PM IST</span>
+              <span className="text-red-400/70 font-mono" style={{ fontSize: 8 }}>22,143.50</span>
+            </div>
           </div>
         </div>
 
-        {/* ─ Chart Area ─ */}
-        <div className="pb-4 flex-shrink-0">
-        <div className="bg-white/[0.03] rounded-xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-semibold text-white/80">NIFTY 50</span>
-            <span className="phone-nifty-badge text-[11px] text-red-400 font-bold flex items-center gap-1">
-              <TrendingDown className="w-3 h-3" />
-              <span className="phone-nifty-pct">-7.2%</span>
-            </span>
-          </div>
-          <svg viewBox="0 0 220 55" className="w-full h-14 phone-chart-svg">
-            <defs>
-              <linearGradient id="crashGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="rgba(239,68,68,0.25)" />
-                <stop offset="100%" stopColor="rgba(239,68,68,0)" />
-              </linearGradient>
-            </defs>
-            <path
-              className="phone-chart-line"
-              d="M0,12 C20,10 35,8 50,11 C65,14 80,16 100,22 C120,28 140,35 160,42 C180,48 200,52 220,54"
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <path
-              className="phone-chart-fill"
-              d="M0,12 C20,10 35,8 50,11 C65,14 80,16 100,22 C120,28 140,35 160,42 C180,48 200,52 220,54 L220,55 L0,55 Z"
-              fill="url(#crashGrad)"
-            />
-          </svg>
-          <div className="flex items-center justify-between mt-1.5">
-            <span className="text-[9px] text-text-slate">Intraday • 3:45 PM IST</span>
-            <span className="text-[9px] text-red-400/70 font-mono">22,143.50</span>
-          </div>
+        {/* Holdings */}
+        <div className="phone-holdings flex flex-col" style={{ gap: 6 }}>
+          {[
+            { name: 'Axis Bluechip', pct: '-5.1%' },
+            { name: 'SBI Small Cap', pct: '-8.3%' },
+            { name: 'ICICI Pru Value', pct: '-3.7%' },
+          ].map((h) => (
+            <div key={h.name} className="flex items-center justify-between bg-white/[0.02] rounded-lg"
+              style={{ padding: '8px 14px' }}>
+              <span className="text-white/70" style={{ fontSize: 11 }}>{h.name}</span>
+              <span className="font-mono font-semibold text-red-400" style={{ fontSize: 11 }}>{h.pct}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-        {/* ─ Holdings List ─ */}
-        <div className="phone-holdings flex flex-col gap-2.5">
-        {[
-          { name: 'Axis Bluechip', pct: '-5.1%', color: 'text-red-400' },
-          { name: 'SBI Small Cap', pct: '-8.3%', color: 'text-red-400' },
-          { name: 'ICICI Pru Value', pct: '-3.7%', color: 'text-red-400' },
-        ].map((h) => (
-          <div key={h.name} className="flex items-center justify-between py-2.5 px-4 bg-white/[0.02] rounded-lg">
-            <span className="text-[12px] text-white/70">{h.name}</span>
-            <span className={`text-[12px] font-mono font-semibold ${h.color}`}>{h.pct}</span>
-          </div>
-        ))}
-        {/* end holdings list */}
-      </div>
-      {/* end main content area */}
-      </div>
-
-      {/* ─ WhatsApp Notification (Absolute centered overlay) ─ */}
-      <div className="phone-notification-wrapper absolute inset-0 flex items-center justify-center px-4 z-50 pointer-events-none opacity-0">
-        <div className="w-full bg-[#1F2833]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto">
-          <div className="flex items-center gap-2.5 mb-2.5">
-            <div className="w-7 h-7 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0">
-              <MessageCircle className="w-4 h-4 text-white" />
+      {/* WhatsApp Notification — anchored to bottom */}
+      <div className="phone-notification-wrapper absolute left-0 right-0 z-50 pointer-events-none opacity-0"
+        style={{ bottom: 28, padding: '0 16px' }}>
+        <div className="w-full backdrop-blur-xl border rounded-2xl pointer-events-auto"
+          style={{
+            background: 'rgba(31,40,51,0.95)',
+            borderColor: 'rgba(255,255,255,0.12)',
+            padding: '14px 16px',
+            boxShadow: '0 16px 48px rgba(0,0,0,0.7)',
+          }}>
+          <div className="flex items-center" style={{ gap: 10, marginBottom: 10 }}>
+            <div className="flex-shrink-0 rounded-full bg-[#25D366] flex items-center justify-center"
+              style={{ width: 28, height: 28 }}>
+              <MessageCircle className="text-white" style={{ width: 15, height: 15 }} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[11px] font-bold text-[#25D366]">AstraGuard Alert</p>
-              <p className="text-[9px] text-text-slate">via WhatsApp • now</p>
+              <p className="font-bold text-[#25D366]" style={{ fontSize: 11, lineHeight: 1.3 }}>AstraGuard Alert</p>
+              <p className="text-[#94A3B8]" style={{ fontSize: 9 }}>via WhatsApp · now</p>
             </div>
-            <Bell className="w-3.5 h-3.5 text-[#25D366]/70 flex-shrink-0 phone-bell" />
+            <Bell className="flex-shrink-0 text-[#25D366]/70 phone-bell" style={{ width: 14, height: 14 }} />
           </div>
-          <p className="text-[12px] text-white/90 leading-[1.6]">
-            🚨 Nifty dropped 7.2%. Your FIRE plan is intact.{' '}
+          <p className="text-white/90" style={{ fontSize: 11, lineHeight: 1.65 }}>
+            Nifty dropped 7.2%. Your FIRE plan is intact.{' '}
             <span className="text-[#45f3ff] font-semibold">Do not stop your SIP.</span>{' '}
             Stopping now delays retirement by 2.3 years.
           </p>
         </div>
       </div>
 
-      {/* ─ Home bar ─ */}
-      <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/20 rounded-full z-[100]" />
+      {/* Home bar */}
+      <div className="absolute left-1/2 -translate-x-1/2 bg-white/20 rounded-full z-[100]"
+        style={{ bottom: 6, width: 100, height: 4 }} />
     </div>
   )
 }
