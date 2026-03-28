@@ -362,15 +362,25 @@ function FeatureRow({ feature, isReversed }) {
         boxShadow: '0 30px 80px rgba(0,0,0,0.5)',
         display: 'flex', flexDirection: 'column',
       }}>
-        {/* Corner glow */}
+        {/* Corner glow — teal accent */}
         <div style={{
           position: 'absolute', pointerEvents: 'none',
-          width: '900px', height: '900px',
-          filter: 'blur(160px)', opacity: 0.3,
-          background: THEME_BLUE,
+          width: '800px', height: '800px',
+          filter: 'blur(180px)', opacity: 0.12,
+          background: 'radial-gradient(circle, rgba(69,162,158,0.5) 0%, rgba(69,162,158,0.1) 50%, transparent 80%)',
           ...(isReversed
             ? { bottom: '-200px', left: '-200px' }
             : { top: '-200px', right: '-200px' }
+          ),
+        }} />
+        <div style={{
+          position: 'absolute', pointerEvents: 'none',
+          width: '600px', height: '600px',
+          filter: 'blur(140px)', opacity: 0.15,
+          background: THEME_BLUE,
+          ...(isReversed
+            ? { top: '-150px', right: '-150px' }
+            : { bottom: '-150px', left: '-150px' }
           ),
         }} />
 
@@ -390,13 +400,20 @@ function FeatureRow({ feature, isReversed }) {
             paddingRight: isReversed ? '120px' : '60px',
             position: 'relative',
           }}>
-            {/* Subtle glow behind text */}
+            {/* Teal gradient glow behind text */}
             <div style={{
-              position: 'absolute', top: '50%', left: '50%',
+              position: 'absolute', top: '40%', left: '45%',
               transform: 'translate(-50%, -50%)',
-              width: '420px', height: '420px', borderRadius: '50%',
-              filter: 'blur(120px)', pointerEvents: 'none',
-              opacity: 0.12, backgroundColor: THEME_BLUE, zIndex: -1,
+              width: '500px', height: '500px', borderRadius: '50%',
+              filter: 'blur(140px)', pointerEvents: 'none',
+              opacity: 0.18, background: 'radial-gradient(circle, rgba(69,162,158,0.6) 0%, rgba(69,162,158,0.15) 50%, transparent 80%)', zIndex: -1,
+            }} />
+            <div style={{
+              position: 'absolute', top: '55%', left: '30%',
+              transform: 'translate(-50%, -50%)',
+              width: '300px', height: '300px', borderRadius: '50%',
+              filter: 'blur(100px)', pointerEvents: 'none',
+              opacity: 0.1, background: THEME_BLUE, zIndex: -1,
             }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
