@@ -155,6 +155,7 @@ export default function HeroSection() {
 
           {/* Secondary */}
           <button
+            onClick={() => { document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' }); }}
             className="group flex items-center cursor-pointer transition-all duration-200 hover:bg-white/[0.08]"
             style={{
               padding: '16px 32px', gap: 12,

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ArrowRight, Check, ShieldCheck, Sparkles, BrainCircuit, Flame, Calculator, PieChart } from 'lucide-react'
 
-const THEME_BLUE = '#061745'
+const THEME_BLUE = 'rgba(69,162,158,0.25)'
 
 // --- Visual Components ---
 
@@ -73,8 +73,8 @@ function FireVisual() {
                   maxWidth: '88%',
                   padding: '14px 18px',
                   borderRadius: msg.sender === 'User' ? '18px 18px 6px 18px' : '18px 18px 18px 6px',
-                  background: msg.sender === 'User' ? 'rgba(6, 23, 69, 0.45)' : 'rgba(255,255,255,0.04)',
-                  border: msg.sender === 'User' ? '1px solid rgba(69, 130, 255, 0.15)' : '1px solid rgba(255,255,255,0.05)',
+                  background: msg.sender === 'User' ? 'rgba(69,162,158,0.12)' : 'rgba(255,255,255,0.04)',
+                  border: msg.sender === 'User' ? '1px solid rgba(69,162,158,0.2)' : '1px solid rgba(255,255,255,0.05)',
                 }}
               >
                 {msg.sender === 'AI' && (
@@ -139,7 +139,7 @@ function TaxVisual() {
         {/* Header */}
         <div>
           <h4 style={{ fontSize: '20px', fontWeight: 500, color: 'white', letterSpacing: '-0.01em', marginBottom: '4px' }}>Old Regime Verification</h4>
-          <p style={{ fontSize: '10px', color: 'rgba(6,23,69,0.7)', fontFamily: 'monospace', letterSpacing: '0.15em', textTransform: 'uppercase' }}>ASTRAGUARD INTELLIGENCE • ACTIVE</p>
+          <p style={{ fontSize: '10px', color: 'rgba(69,162,158,0.5)', fontFamily: 'monospace', letterSpacing: '0.15em', textTransform: 'uppercase' }}>ASTRAGUARD INTELLIGENCE • ACTIVE</p>
         </div>
 
         {/* List items - NO borders, NO bars, clean flat list */}
@@ -159,13 +159,13 @@ function TaxVisual() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <div style={{
                     width: '22px', height: '22px', borderRadius: '50%',
-                    border: isActive ? '1.5px solid rgba(6,23,69,0.8)' : '1.5px solid rgba(255,255,255,0.1)',
-                    background: isActive ? 'rgba(6,23,69,0.2)' : 'transparent',
+                    border: isActive ? '1.5px solid rgba(69,162,158,0.6)' : '1.5px solid rgba(255,255,255,0.1)',
+                    background: isActive ? 'rgba(69,162,158,0.15)' : 'transparent',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all 0.4s ease',
-                    boxShadow: isActive ? '0 0 12px rgba(6,23,69,0.5)' : 'none',
+                    boxShadow: isActive ? '0 0 12px rgba(69,162,158,0.3)' : 'none',
                   }}>
-                    {isActive && <Check style={{ width: '12px', height: '12px', color: 'rgba(120,160,255,0.9)' }} />}
+                    {isActive && <Check style={{ width: '12px', height: '12px', color: '#45A29E' }} />}
                   </div>
                   <span style={{ fontSize: '14px', letterSpacing: '0.02em', color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.4)', fontWeight: isActive ? 500 : 400, transition: 'all 0.4s ease' }}>
                     {d.name}
@@ -180,8 +180,8 @@ function TaxVisual() {
         {/* Result card */}
         <div style={{
           marginTop: '8px', width: '100%', padding: '20px 24px',
-          background: 'linear-gradient(135deg, rgba(6,23,69,0.15) 0%, rgba(10,10,14,0.8) 100%)',
-          border: '1px solid rgba(6,23,69,0.25)', borderRadius: '16px',
+          background: 'linear-gradient(135deg, rgba(69,162,158,0.08) 0%, rgba(10,10,14,0.8) 100%)',
+          border: '1px solid rgba(69,162,158,0.15)', borderRadius: '16px',
           position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ position: 'absolute', top: '16px', right: '16px' }}>
@@ -194,7 +194,7 @@ function TaxVisual() {
               Recommended
             </span>
           </div>
-          <p style={{ fontSize: '10px', color: 'rgba(120,160,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.12em', fontFamily: 'monospace', marginBottom: '8px' }}>Optimum Strategy</p>
+          <p style={{ fontSize: '10px', color: 'rgba(69,162,158,0.5)', textTransform: 'uppercase', letterSpacing: '0.12em', fontFamily: 'monospace', marginBottom: '8px' }}>Optimum Strategy</p>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
             <p style={{ fontSize: '26px', fontWeight: 300, color: 'white', letterSpacing: '-0.02em' }}>Old Regime</p>
             <p style={{ fontSize: '13px', color: 'rgba(34,197,94,0.8)', fontFamily: 'monospace' }}>+₹46,500 Saved</p>
@@ -449,16 +449,17 @@ function FeatureRow({ feature, isReversed }) {
                   href={feature.link}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '10px',
-                    padding: '10px 22px', borderRadius: '100px',
-                    fontSize: '13px', fontWeight: 500,
-                    border: '1px solid rgba(6,23,69,0.4)',
-                    background: 'rgba(6,23,69,0.12)',
-                    color: 'rgba(120,160,255,0.8)',
+                    padding: '12px 26px', borderRadius: '100px',
+                    fontSize: '14px', fontWeight: 500,
+                    border: '1px solid rgba(69,162,158,0.35)',
+                    background: 'rgba(69,162,158,0.1)',
+                    color: '#45A29E',
                     textDecoration: 'none',
                     transition: 'all 0.3s ease',
+                    boxShadow: '0 0 20px rgba(69,162,158,0.08)',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(6,23,69,0.25)'; e.currentTarget.style.borderColor = 'rgba(6,23,69,0.6)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(6,23,69,0.12)'; e.currentTarget.style.borderColor = 'rgba(6,23,69,0.4)'; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(69,162,158,0.2)'; e.currentTarget.style.borderColor = 'rgba(69,162,158,0.55)'; e.currentTarget.style.boxShadow = '0 0 30px rgba(69,162,158,0.15)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(69,162,158,0.1)'; e.currentTarget.style.borderColor = 'rgba(69,162,158,0.35)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(69,162,158,0.08)'; }}
                 >
                   <span>Explore {feature.badge.split(' ')[0]}</span>
                   <ArrowRight style={{ width: '14px', height: '14px', opacity: 0.7 }} />
@@ -507,7 +508,7 @@ function FeatureRow({ feature, isReversed }) {
 
 export default function FeatureZPattern() {
   return (
-    <section style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', zIndex: 10, paddingTop: '20px', paddingBottom: '40px' }}>
+    <section id="features-section" style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', zIndex: 10, paddingTop: '20px', paddingBottom: '40px' }}>
       {features.map((feature, i) => (
         <FeatureRow key={feature.badge} feature={feature} isReversed={i % 2 !== 0} />
       ))}
