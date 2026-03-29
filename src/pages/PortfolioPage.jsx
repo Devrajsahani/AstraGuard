@@ -161,8 +161,57 @@ export default function PortfolioPage() {
                   </p>
                 </div>
 
+                {/* Helper section */}
+                <div style={{
+                  marginTop: 32, borderRadius: 20, padding: '28px 32px',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  background: 'linear-gradient(135deg, rgba(31,40,51,0.5) 0%, rgba(17,19,24,0.8) 100%)',
+                }}>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: 'white', marginBottom: 6 }}>
+                    Don't have your statements yet?
+                  </p>
+                  <p style={{ fontSize: 13, color: '#94A3B8', lineHeight: 1.6, marginBottom: 20 }}>
+                    Visit the portals below to download your CAMS or KFintech consolidated statement.
+                  </p>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
+                    <a
+                      href="https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                        padding: '14px 20px', borderRadius: 14,
+                        background: 'rgba(69,162,158,0.08)',
+                        border: '1px solid rgba(69,162,158,0.25)',
+                        color: '#45A29E', fontSize: 14, fontWeight: 500,
+                        textDecoration: 'none', transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Go to CAMS Portal
+                      <span style={{ fontSize: 12, opacity: 0.6 }}>↗</span>
+                    </a>
+                    <a
+                      href="https://mfs.kfintech.com/investor/General/ConsolidatedAccountStatement"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                        padding: '14px 20px', borderRadius: 14,
+                        background: 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        color: 'rgba(255,255,255,0.7)', fontSize: 14, fontWeight: 500,
+                        textDecoration: 'none', transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Go to KFintech
+                      <span style={{ fontSize: 12, opacity: 0.6 }}>↗</span>
+                    </a>
+                  </div>
+                </div>
+
                 {/* Mode B button */}
-                <div className="flex justify-center" style={{ marginTop: 28 }}>
+                <div className="flex justify-center" style={{ marginTop: 24 }}>
                   <button
                     onClick={() => setDataLoaded(true)}
                     className="rounded-full border border-[#94A3B8]/30 text-[#94A3B8] hover:text-white hover:border-white/40 transition-all duration-200 cursor-pointer"
