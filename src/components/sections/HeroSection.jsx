@@ -126,7 +126,7 @@ export default function HeroSection() {
           className="text-lg sm:text-xl leading-relaxed text-white max-w-2xl"
           style={{ fontFamily: "'Instrument Sans', sans-serif" }}
         >
-          128% of SIPs stop during market corrections. AstraGuard monitors your
+          12-18% of SIPs stop during market corrections. AstraGuard monitors your
           portfolio and intercepts financial panic before it destroys your future.
         </motion.p>
 

@@ -6,6 +6,7 @@ import TaxPage from './pages/TaxPage'
 import PortfolioPage from './pages/PortfolioPage'
 import DashboardPage from './pages/DashboardPage'
 import Onboard from './pages/Onboard'
+import Auth from './pages/Auth'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <div className="relative min-h-screen bg-void w-full min-w-0 overflow-x-hidden text-white font-sans selection:bg-[#45f3ff]/30 selection:text-white">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/onboard" element={<Onboard />} />
           <Route path="/fire" element={<FirePage />} />
           <Route path="/tax" element={<TaxPage />} />
