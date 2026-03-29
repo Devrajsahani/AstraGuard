@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { api } from '../services/api'
 import { useState } from 'react'
+import ScrollReveal from '../components/ui/ScrollReveal'
 
 function KpiCard({ icon: Icon, iconColor, iconBg, label, value, sub, badge, badgeColor }) {
   return (
@@ -118,35 +119,46 @@ export default function DashboardPage() {
       <div style={{ padding: '56px 80px' }} className="flex flex-col gap-12">
 
         {/* Page heading */}
-        <div className="flex items-start justify-between gap-6">
-          <div>
-            <h1 className="text-[34px] font-bold text-white tracking-tight leading-tight">Good morning, Aryan</h1>
-            <p className="text-[16px] text-[#94A3B8] mt-3">Your portfolio is performing well — here's your daily snapshot.</p>
+        <ScrollReveal variant="blurIn" duration={0.8}>
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <h1 className="text-[34px] font-bold text-white tracking-tight leading-tight">Good morning, Aryan</h1>
+              <p className="text-[16px] text-[#94A3B8] mt-3">Your portfolio is performing well — here's your daily snapshot.</p>
+            </div>
+            <div className="flex items-center gap-3 text-[13px] text-[#94A3B8]/70 bg-white/[0.03] border border-white/[0.07] rounded-xl shrink-0"
+              style={{ padding: '12px 20px' }}>
+              <CalendarDays className="h-4 w-4 shrink-0" />
+              <span>{today}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-[13px] text-[#94A3B8]/70 bg-white/[0.03] border border-white/[0.07] rounded-xl shrink-0"
-            style={{ padding: '12px 20px' }}>
-            <CalendarDays className="h-4 w-4 shrink-0" />
-            <span>{today}</span>
-          </div>
-        </div>
+        </ScrollReveal>
 
         {/* KPI row */}
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
-          <KpiCard icon={IndianRupee} iconColor="text-[#45A29E]" iconBg="bg-[#45A29E]/12"
-            label="Portfolio Value" value="₹18.4L" sub="Across 7 mutual funds"
-            badge="+8.3%" badgeColor="text-emerald-400 bg-emerald-400/10" />
-          <KpiCard icon={TrendingUp} iconColor="text-sky-400" iconBg="bg-sky-400/10"
-            label="Monthly SIP" value="₹25,000" sub="Next debit in 3 days"
-            badge="Active" badgeColor="text-sky-400 bg-sky-400/10" />
-          <KpiCard icon={BarChart3} iconColor="text-violet-400" iconBg="bg-violet-400/10"
-            label="XIRR Returns" value="14.2%" sub="Annualised since inception"
-            badge="+1.4%" badgeColor="text-emerald-400 bg-emerald-400/10" />
-          <KpiCard icon={Zap} iconColor="text-amber-400" iconBg="bg-amber-400/10"
-            label="Arth Score" value="743" sub="Top 12% of all users"
-            badge="+12 pts" badgeColor="text-emerald-400 bg-emerald-400/10" />
+          <ScrollReveal variant="fadeUp" staggerIndex={0} staggerDelay={0.1} duration={0.7}>
+            <KpiCard icon={IndianRupee} iconColor="text-[#45A29E]" iconBg="bg-[#45A29E]/12"
+              label="Portfolio Value" value="₹18.4L" sub="Across 7 mutual funds"
+              badge="+8.3%" badgeColor="text-emerald-400 bg-emerald-400/10" />
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" staggerIndex={1} staggerDelay={0.1} duration={0.7}>
+            <KpiCard icon={TrendingUp} iconColor="text-sky-400" iconBg="bg-sky-400/10"
+              label="Monthly SIP" value="₹25,000" sub="Next debit in 3 days"
+              badge="Active" badgeColor="text-sky-400 bg-sky-400/10" />
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" staggerIndex={2} staggerDelay={0.1} duration={0.7}>
+            <KpiCard icon={BarChart3} iconColor="text-violet-400" iconBg="bg-violet-400/10"
+              label="XIRR Returns" value="14.2%" sub="Annualised since inception"
+              badge="+1.4%" badgeColor="text-emerald-400 bg-emerald-400/10" />
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" staggerIndex={3} staggerDelay={0.1} duration={0.7}>
+            <KpiCard icon={Zap} iconColor="text-amber-400" iconBg="bg-amber-400/10"
+              label="Arth Score" value="743" sub="Top 12% of all users"
+              badge="+12 pts" badgeColor="text-emerald-400 bg-emerald-400/10" />
+          </ScrollReveal>
         </div>
 
         {/* Arth Score + Activity */}
+        <ScrollReveal variant="slideReveal" duration={0.9}>
         <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-6">
 
           {/* Score */}
@@ -217,7 +229,10 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        </ScrollReveal>
+
         {/* Engines & Goals */}
+        <ScrollReveal variant="fadeUp" duration={0.9} delay={0.1}>
         <div>
           <div className="flex items-end justify-between mb-7">
             <div>
@@ -266,7 +281,10 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        </ScrollReveal>
+
         {/* Behavioral guard */}
+        <ScrollReveal variant="fadeScale" duration={0.8}>
         <div className="rounded-2xl border border-rose-500/15 bg-[#100d0d] flex flex-col sm:flex-row sm:items-center gap-8"
           style={{ padding: '36px 40px' }}>
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-rose-500/12 border border-rose-500/20">
@@ -311,6 +329,7 @@ export default function DashboardPage() {
             )}
           </button>
         </div>
+        </ScrollReveal>
 
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { UploadCloud, Search, BrainCircuit, TrendingUp, Wallet, BarChart3, AlertTriangle, Info, Loader2 } from 'lucide-react'
 import { api } from '../services/api'
+import ScrollReveal from '../components/ui/ScrollReveal'
 
 function formatINR(num) {
   if (num == null || isNaN(num)) return '₹0'
@@ -92,17 +93,20 @@ export default function PortfolioPage() {
         <div className="w-full" style={{ maxWidth: 1280 }}>
 
           {/* Header */}
-          <div className="flex items-center" style={{ gap: 16, marginBottom: 12 }}>
-            <div className="flex items-center justify-center rounded-2xl bg-[#45A29E]/12 border border-[#45A29E]/20"
-              style={{ height: 48, width: 48 }}>
-              <Search className="text-[#45A29E]" style={{ height: 24, width: 24 }} strokeWidth={1.75} />
+          <ScrollReveal variant="blurIn" duration={0.8}>
+            <div className="flex items-center" style={{ gap: 16, marginBottom: 12 }}>
+              <div className="flex items-center justify-center rounded-2xl bg-[#45A29E]/12 border border-[#45A29E]/20"
+                style={{ height: 48, width: 48 }}>
+                <Search className="text-[#45A29E]" style={{ height: 24, width: 24 }} strokeWidth={1.75} />
+              </div>
+              <div>
+                <h1 className="font-bold text-white" style={{ fontSize: 26, lineHeight: 1.2 }}>Mutual Fund X-Ray Scanner</h1>
+                <p className="text-[#94A3B8]" style={{ fontSize: 14, marginTop: 4 }}>Upload your CAMS statement to detect dangerous overlaps and optimize STCG</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-bold text-white" style={{ fontSize: 26, lineHeight: 1.2 }}>Mutual Fund X-Ray Scanner</h1>
-              <p className="text-[#94A3B8]" style={{ fontSize: 14, marginTop: 4 }}>Upload your CAMS statement to detect dangerous overlaps and optimize STCG</p>
-            </div>
-          </div>
+          </ScrollReveal>
 
+          <ScrollReveal variant="fadeUp" duration={0.9} delay={0.15}>
           <AnimatePresence mode="wait">
             {!dataLoaded ? (
               <motion.div
@@ -466,6 +470,7 @@ export default function PortfolioPage() {
               </motion.div>
             )}
           </AnimatePresence>
+          </ScrollReveal>
         </div>
       </div>
 
