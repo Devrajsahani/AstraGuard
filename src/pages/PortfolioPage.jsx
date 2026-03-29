@@ -115,9 +115,8 @@ export default function PortfolioPage() {
               >
                 {/* Upload zone */}
                 <div
-                  className={`rounded-3xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer relative overflow-hidden transition-all duration-300 ${
-                    isDragOver ? 'border-[#45A29E] bg-[#45A29E]/[0.06]' : 'border-[#45A29E]/40 hover:bg-[#45A29E]/[0.03]'
-                  }`}
+                  className={`rounded-3xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer relative overflow-hidden transition-all duration-300 ${isDragOver ? 'border-[#45A29E] bg-[#45A29E]/[0.06]' : 'border-[#45A29E]/40 hover:bg-[#45A29E]/[0.03]'
+                    }`}
                   style={{ ...glassStyle, height: 320, padding: '48px 32px' }}
                   onDragOver={(e) => { e.preventDefault(); setIsDragOver(true) }}
                   onDragLeave={() => setIsDragOver(false)}
@@ -161,8 +160,54 @@ export default function PortfolioPage() {
                   </p>
                 </div>
 
+                {/* Guide Panel */}
+                <div className="rounded-3xl border border-[#45A29E]/20 bg-[#45A29E]/[0.05]" style={{ marginTop: 24, padding: '24px 32px' }}>
+                  <h3 className="font-bold text-white mb-2" style={{ fontSize: 17 }}>Don't have your statements yet?</h3>
+                  <p className="text-[#94A3B8] mb-6" style={{ fontSize: 13, lineHeight: 1.6 }}>Download our smart guide extension, then visit the portal. The extension will automatically activate and guide you step-by-step to download your files.</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <a
+                      href="/astra-guide-extension.zip"
+                      download="astra-guide-extension.zip"
+                      className="flex items-center justify-center rounded-xl bg-[#45A29E] text-[#0B0C10] font-bold hover:bg-[#3d9490] hover:scale-[1.01] transition-all duration-200 shadow-[0_0_24px_rgba(69,162,158,0.15)]"
+                      style={{ padding: '16px 20px', fontSize: 14, gap: 10, height: '100%' }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                      1. Download Extension
+                    </a>
+                    
+                    <div className="flex flex-col gap-3">
+                      <a
+                        href="https://mfs.kfintech.com/investor/General/ConsolidatedAccountStatement"
+                        target="_blank" rel="noreferrer"
+                        className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
+                        style={{ padding: '12px 16px', fontSize: 13 }}
+                      >
+                        <div className="flex items-center gap-3">
+                           <span className="flex items-center justify-center rounded-md bg-[#45A29E]/20 text-[#45A29E] font-bold" style={{ width: 20, height: 20, fontSize: 11 }}>2</span>
+                           <span className="text-white/90 font-medium">Go to KFintech</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="opacity-60"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                      </a>
+
+                      <a
+                        href="https://www.tdscpc.gov.in/"
+                        target="_blank" rel="noreferrer"
+                        className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
+                        style={{ padding: '12px 16px', fontSize: 13 }}
+                      >
+                        <div className="flex items-center gap-3">
+                           <span className="flex items-center justify-center rounded-md bg-[#45A29E]/20 text-[#45A29E] font-bold" style={{ width: 20, height: 20, fontSize: 11 }}>2</span>
+                           <span className="text-white/90 font-medium">Go to TRACES (Form 16)</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="opacity-60"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Mode B button */}
-                <div className="flex justify-center" style={{ marginTop: 28 }}>
+                <div className="flex justify-center" style={{ marginTop: 24 }}>
                   <button
                     onClick={() => setDataLoaded(true)}
                     className="rounded-full border border-[#94A3B8]/30 text-[#94A3B8] hover:text-white hover:border-white/40 transition-all duration-200 cursor-pointer"
@@ -325,20 +370,19 @@ export default function PortfolioPage() {
                                   height: 56,
                                   background: isDiag ? '#0B0C10'
                                     : isHigh ? 'rgba(225,29,72,0.15)'
-                                    : isLow ? 'rgba(69,162,158,0.12)'
-                                    : 'rgba(255,255,255,0.04)',
+                                      : isLow ? 'rgba(69,162,158,0.12)'
+                                        : 'rgba(255,255,255,0.04)',
                                   border: isDiag ? '1px solid rgba(255,255,255,0.04)'
                                     : isHigh ? '1px solid rgba(225,29,72,0.2)'
-                                    : isLow ? '1px solid rgba(69,162,158,0.15)'
-                                    : '1px solid rgba(255,255,255,0.06)',
+                                      : isLow ? '1px solid rgba(69,162,158,0.15)'
+                                        : '1px solid rgba(255,255,255,0.06)',
                                 }}
                                 onMouseEnter={() => !isDiag && setHoveredCell(cellKey)}
                                 onMouseLeave={() => setHoveredCell(null)}
                               >
                                 {!isDiag && (
-                                  <span className={`font-bold ${
-                                    isHigh ? 'text-[#E11D48]' : isLow ? 'text-[#45A29E]' : 'text-white/40'
-                                  }`} style={{ fontSize: 15 }}>
+                                  <span className={`font-bold ${isHigh ? 'text-[#E11D48]' : isLow ? 'text-[#45A29E]' : 'text-white/40'
+                                    }`} style={{ fontSize: 15 }}>
                                     {val}%
                                   </span>
                                 )}
