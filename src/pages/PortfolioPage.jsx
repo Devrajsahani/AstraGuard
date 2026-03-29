@@ -161,64 +161,86 @@ export default function PortfolioPage() {
                   </p>
                 </div>
 
-                {/* Helper section */}
+                {/* Guide Panel */}
                 <div style={{
                   marginTop: 32, borderRadius: 20, padding: '28px 32px',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  background: 'linear-gradient(135deg, rgba(31,40,51,0.5) 0%, rgba(17,19,24,0.8) 100%)',
+                  border: '1px solid rgba(69,162,158,0.15)',
+                  background: 'linear-gradient(135deg, rgba(69,162,158,0.04) 0%, rgba(17,19,24,0.8) 100%)',
                 }}>
-                  <p style={{ fontSize: 15, fontWeight: 600, color: 'white', marginBottom: 6 }}>
+                  <p style={{ fontSize: 16, fontWeight: 700, color: 'white', marginBottom: 6 }}>
                     Don't have your statements yet?
                   </p>
-                  <p style={{ fontSize: 13, color: '#94A3B8', lineHeight: 1.6, marginBottom: 20 }}>
-                    Visit the portals below to download your CAMS or KFintech consolidated statement.
+                  <p style={{ fontSize: 13, color: '#94A3B8', lineHeight: 1.6, marginBottom: 24 }}>
+                    Download our smart guide extension, then visit the portal. The extension will automatically activate and guide you step-by-step to download your files.
                   </p>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
                     <a
-                      href="https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/astra-guide-extension.zip"
+                      download="astra-guide-extension.zip"
                       style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        padding: '14px 20px', borderRadius: 14,
-                        background: 'rgba(69,162,158,0.08)',
-                        border: '1px solid rgba(69,162,158,0.25)',
-                        color: '#45A29E', fontSize: 14, fontWeight: 500,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                        padding: '16px 20px', borderRadius: 14,
+                        background: '#45A29E', color: '#0B0C10',
+                        fontSize: 14, fontWeight: 700,
                         textDecoration: 'none', transition: 'all 0.2s ease',
+                        boxShadow: '0 0 24px rgba(69,162,158,0.15)',
                       }}
                     >
-                      Go to CAMS Portal
-                      <span style={{ fontSize: 12, opacity: 0.6 }}>↗</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                      1. Download Extension
                     </a>
+
                     <a
                       href="https://mfs.kfintech.com/investor/General/ConsolidatedAccountStatement"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        padding: '14px 20px', borderRadius: 14,
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '14px 16px', borderRadius: 14,
                         background: 'rgba(255,255,255,0.03)',
                         border: '1px solid rgba(255,255,255,0.1)',
-                        color: 'rgba(255,255,255,0.7)', fontSize: 14, fontWeight: 500,
+                        color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 500,
                         textDecoration: 'none', transition: 'all 0.2s ease',
                       }}
                     >
-                      Go to KFintech
-                      <span style={{ fontSize: 12, opacity: 0.6 }}>↗</span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span style={{
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                          width: 22, height: 22, borderRadius: 6,
+                          background: 'rgba(69,162,158,0.2)', color: '#45A29E',
+                          fontSize: 11, fontWeight: 700,
+                        }}>2</span>
+                        Go to KFintech
+                      </span>
+                      <span style={{ opacity: 0.5, fontSize: 12 }}>↗</span>
+                    </a>
+
+                    <a
+                      href="https://www.tdscpc.gov.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '14px 16px', borderRadius: 14,
+                        background: 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 500,
+                        textDecoration: 'none', transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span style={{
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                          width: 22, height: 22, borderRadius: 6,
+                          background: 'rgba(69,162,158,0.2)', color: '#45A29E',
+                          fontSize: 11, fontWeight: 700,
+                        }}>3</span>
+                        Go to TRACES (Form 16)
+                      </span>
+                      <span style={{ opacity: 0.5, fontSize: 12 }}>↗</span>
                     </a>
                   </div>
-                </div>
-
-                {/* Mode B button */}
-                <div className="flex justify-center" style={{ marginTop: 24 }}>
-                  <button
-                    onClick={() => setDataLoaded(true)}
-                    className="rounded-full border border-[#94A3B8]/30 text-[#94A3B8] hover:text-white hover:border-white/40 transition-all duration-200 cursor-pointer"
-                    style={{ padding: '12px 28px', fontSize: 14 }}
-                  >
-                    Demo: Load Mode B (Mock Data)
-                  </button>
                 </div>
               </motion.div>
             ) : (
