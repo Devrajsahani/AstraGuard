@@ -115,9 +115,8 @@ export default function PortfolioPage() {
               >
                 {/* Upload zone */}
                 <div
-                  className={`rounded-3xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer relative overflow-hidden transition-all duration-300 ${
-                    isDragOver ? 'border-[#45A29E] bg-[#45A29E]/[0.06]' : 'border-[#45A29E]/40 hover:bg-[#45A29E]/[0.03]'
-                  }`}
+                  className={`rounded-3xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer relative overflow-hidden transition-all duration-300 ${isDragOver ? 'border-[#45A29E] bg-[#45A29E]/[0.06]' : 'border-[#45A29E]/40 hover:bg-[#45A29E]/[0.03]'
+                    }`}
                   style={{ ...glassStyle, height: 320, padding: '48px 32px' }}
                   onDragOver={(e) => { e.preventDefault(); setIsDragOver(true) }}
                   onDragLeave={() => setIsDragOver(false)}
@@ -396,20 +395,19 @@ export default function PortfolioPage() {
                                   height: 56,
                                   background: isDiag ? '#0B0C10'
                                     : isHigh ? 'rgba(225,29,72,0.15)'
-                                    : isLow ? 'rgba(69,162,158,0.12)'
-                                    : 'rgba(255,255,255,0.04)',
+                                      : isLow ? 'rgba(69,162,158,0.12)'
+                                        : 'rgba(255,255,255,0.04)',
                                   border: isDiag ? '1px solid rgba(255,255,255,0.04)'
                                     : isHigh ? '1px solid rgba(225,29,72,0.2)'
-                                    : isLow ? '1px solid rgba(69,162,158,0.15)'
-                                    : '1px solid rgba(255,255,255,0.06)',
+                                      : isLow ? '1px solid rgba(69,162,158,0.15)'
+                                        : '1px solid rgba(255,255,255,0.06)',
                                 }}
                                 onMouseEnter={() => !isDiag && setHoveredCell(cellKey)}
                                 onMouseLeave={() => setHoveredCell(null)}
                               >
                                 {!isDiag && (
-                                  <span className={`font-bold ${
-                                    isHigh ? 'text-[#E11D48]' : isLow ? 'text-[#45A29E]' : 'text-white/40'
-                                  }`} style={{ fontSize: 15 }}>
+                                  <span className={`font-bold ${isHigh ? 'text-[#E11D48]' : isLow ? 'text-[#45A29E]' : 'text-white/40'
+                                    }`} style={{ fontSize: 15 }}>
                                     {val}%
                                   </span>
                                 )}
