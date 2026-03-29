@@ -6,7 +6,6 @@ import FeatureZPattern from '../components/sections/FeatureZPattern'
 import PanicIntercept from '../components/sections/PanicIntercept'
 import BehavioralFinale from '../components/sections/BehavioralFinale'
 import Navbar from '../components/layout/Navbar'
-import ScrollReveal from '../components/ui/ScrollReveal'
 
 function FloatingDots() {
   const canvasRef = useRef(null)
@@ -98,31 +97,21 @@ export default function LandingPage() {
         <Navbar />
         <HeroSection />
 
-        <ScrollReveal variant="blurIn" duration={1}>
-          <PerspectiveGrid />
-        </ScrollReveal>
+        <PerspectiveGrid />
 
-        <ScrollReveal variant="slideReveal" duration={1}>
-          <AgentShowcase />
-        </ScrollReveal>
+        <AgentShowcase />
 
-        <ScrollReveal variant="blurIn" duration={1}>
-          <PerspectiveGrid
-            badge="Core Engines"
-            title="Three Engines."
-            highlightWord="Zero Guesswork."
-            titleSuffix=""
-            subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
-          />
-        </ScrollReveal>
+        <PerspectiveGrid
+          badge="Core Engines"
+          title="Three Engines."
+          highlightWord="Zero Guesswork."
+          titleSuffix=""
+          subtitle="Deterministic math, traceable logic, and zero hallucinated numbers."
+        />
 
-        <ScrollReveal variant="fadeUp" duration={1}>
-          <FeatureZPattern />
-        </ScrollReveal>
+        <FeatureZPattern />
 
-        <ScrollReveal variant="slideReveal" duration={1.2}>
-          <BehavioralFinale />
-        </ScrollReveal>
+        <BehavioralFinale />
       </div>
     </main>
   )

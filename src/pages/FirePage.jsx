@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Flame, TrendingUp, Target, AlertTriangle, Clock, Wallet, PiggyBank, Shield } from 'lucide-react'
-import ScrollReveal from '../components/ui/ScrollReveal'
 
 function formatINR(num) {
   if (num == null || isNaN(num)) return '₹0'
@@ -202,21 +201,18 @@ export default function FirePage() {
         <div className="w-full" style={{ maxWidth: 1280 }}>
 
           {/* Page header */}
-          <ScrollReveal variant="blurIn" duration={0.8}>
-            <div className="flex items-center" style={{ gap: 16, marginBottom: 40 }}>
-              <div className="flex items-center justify-center rounded-2xl bg-[#45A29E]/12 border border-[#45A29E]/20"
-                style={{ height: 48, width: 48 }}>
-                <Flame className="text-[#45A29E]" style={{ height: 24, width: 24 }} strokeWidth={1.75} />
-              </div>
-              <div>
-                <h1 className="font-bold text-white" style={{ fontSize: 26, lineHeight: 1.2 }}>FIRE Planner</h1>
-                <p className="text-[#94A3B8]" style={{ fontSize: 14, marginTop: 4 }}>Financial Independence, Retire Early — Simulator</p>
-              </div>
+          <div className="flex items-center" style={{ gap: 16, marginBottom: 40 }}>
+            <div className="flex items-center justify-center rounded-2xl bg-[#45A29E]/12 border border-[#45A29E]/20"
+              style={{ height: 48, width: 48 }}>
+              <Flame className="text-[#45A29E]" style={{ height: 24, width: 24 }} strokeWidth={1.75} />
             </div>
-          </ScrollReveal>
+            <div>
+              <h1 className="font-bold text-white" style={{ fontSize: 26, lineHeight: 1.2 }}>FIRE Planner</h1>
+              <p className="text-[#94A3B8]" style={{ fontSize: 14, marginTop: 4 }}>Financial Independence, Retire Early — Simulator</p>
+            </div>
+          </div>
 
           {/* Two-column grid */}
-          <ScrollReveal variant="fadeUp" duration={0.9} delay={0.15}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32 }} className="lg:!grid-cols-[380px_1fr]">
 
             {/* LEFT: Controls */}
@@ -387,7 +383,6 @@ export default function FirePage() {
 
             </div>
           </div>
-          </ScrollReveal>
         </div>
       </div>
 
