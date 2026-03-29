@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UploadCloud, Search, BrainCircuit, TrendingUp, Wallet, BarChart3, AlertTriangle, Info } from 'lucide-react'
+import { UploadCloud, Search, BrainCircuit, TrendingUp, Wallet, BarChart3, AlertTriangle, Info, Loader2 } from 'lucide-react'
+import { api } from '../services/api'
 
 function formatINR(num) {
   if (num == null || isNaN(num)) return '₹0'
@@ -51,6 +52,7 @@ const glassStyle = {
 
 export default function PortfolioPage() {
   const [dataLoaded, setDataLoaded] = useState(new URLSearchParams(window.location.search).get('demo') === '1')
+  const [loading, setLoading] = useState(false)
   const [hoveredCell, setHoveredCell] = useState(null)
   const [isDragOver, setIsDragOver] = useState(false)
   const fileRef = useRef(null)
@@ -59,10 +61,29 @@ export default function PortfolioPage() {
   const totalCurrent = FUND_HOLDINGS.reduce((s, f) => s + f.current, 0)
   const weightedXIRR = FUND_HOLDINGS.reduce((s, f) => s + f.xirr * (f.invested / totalInvested), 0)
 
-  const handleDrop = (e) => {
+  const uploadFile = async (file) => {
+    try {
+      setLoading(true)
+      // The API endpoint needs the actual file
+      const res = await api.uploadCAS('user_123', 'PAN1234', file)
+      console.log('CAS Upload Success!', res.data)
+      alert("Backend parsed your CAS! Check browser console for full JSON payload.")
+      setDataLoaded(true)
+    } catch (err) {
+      console.error('CAS Upload Failed:', err)
+      alert("Failed to connect to backend. Falling back to Demo Mode...")
+      setDataLoaded(true) // Fall back to demo mode gracefully so frontend still works
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDrop = async (e) => {
     e.preventDefault()
     setIsDragOver(false)
-    setDataLoaded(true)
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await uploadFile(e.dataTransfer.files[0])
+    }
   }
 
   return (
@@ -103,19 +124,34 @@ export default function PortfolioPage() {
                   onDrop={handleDrop}
                   onClick={() => fileRef.current?.click()}
                 >
-                  <input ref={fileRef} type="file" accept=".pdf" className="hidden" onChange={() => setDataLoaded(true)} />
+                  <input ref={fileRef} type="file" accept=".pdf" className="hidden" onChange={(e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      uploadFile(e.target.files[0])
+                    }
+                  }} />
 
-                  <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                    className="flex items-center justify-center rounded-2xl bg-[#45A29E]/15 border border-[#45A29E]/25"
-                    style={{ height: 64, width: 64, marginBottom: 24 }}
-                  >
-                    <UploadCloud className="text-[#45A29E]" style={{ height: 32, width: 32 }} strokeWidth={1.5} />
-                  </motion.div>
+                  {loading ? (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      className="flex items-center justify-center rounded-2xl bg-[#45A29E]/15 border border-[#45A29E]/25 text-[#45A29E]"
+                      style={{ height: 64, width: 64, marginBottom: 24 }}
+                    >
+                      <Loader2 style={{ height: 32, width: 32 }} strokeWidth={2} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="flex items-center justify-center rounded-2xl bg-[#45A29E]/15 border border-[#45A29E]/25"
+                      style={{ height: 64, width: 64, marginBottom: 24 }}
+                    >
+                      <UploadCloud className="text-[#45A29E]" style={{ height: 32, width: 32 }} strokeWidth={1.5} />
+                    </motion.div>
+                  )}
 
                   <h2 className="font-bold text-white text-center" style={{ fontSize: 20, marginBottom: 8 }}>
-                    Drag & Drop CAMS Detailed PDF
+                    {loading ? 'Uploading safely directly to backend...' : 'Drag & Drop CAMS Detailed PDF'}
                   </h2>
                   <p className="text-[#94A3B8] text-center" style={{ fontSize: 14, lineHeight: 1.6 }}>
                     Encrypted locally. We do not store your PAN.

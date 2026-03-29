@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUp, Sparkles, Shield, Check } from 'lucide-react'
-
-const STEPS = [
-  { question: "What's your primary financial goal — equity growth, capital stability, or early retirement?", label: 'Goal setting' },
-  { question: "On a scale of 1–10, how would you react if your portfolio dropped 15% in a single month?", label: 'Risk profile' },
-  { question: "What's your approximate monthly investable surplus after all living expenses?", label: 'Surplus mapping' },
-  { question: "Do you have any high-interest debt (credit cards, personal loans) we should factor in?", label: 'Debt analysis' },
-]
+import { api } from '../services/api'
 
 export default function Onboard() {
   const navigate = useNavigate()
@@ -19,47 +13,68 @@ export default function Onboard() {
   const nextId = () => { const n = idRef.current; idRef.current += 1; return `m-${n}` }
 
   const [input, setInput] = useState('')
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(0) // Now tracks API completions conceptually
   const [isTyping, setIsTyping] = useState(false)
+  const [sessionId] = useState(() => Math.random().toString(36).substring(7))
   const [messages, setMessages] = useState([
     {
       id: 'm-0', sender: 'bot',
-      text: "Hi — I'm AstraGuard AI. I'll build your Financial DNA profile in 4 short questions so I can protect your investments intelligently.\n\n" + STEPS[0].question,
+      text: "Hi — I'm AstraGuard AI. I'll build your Financial DNA profile. Hit any key or send a message to start!",
     },
   ])
+  const [completionPct, setCompletionPct] = useState(0)
+  const [isDone, setIsDone] = useState(false)
 
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, isTyping])
 
   useEffect(() => {
-    if (step >= STEPS.length && !redirectRef.current) {
+    if (isDone && !redirectRef.current) {
       redirectRef.current = true
-      const t = window.setTimeout(() => navigate('/dashboard'), 1400)
+      const t = window.setTimeout(() => navigate('/dashboard'), 2000)
       return () => window.clearTimeout(t)
     }
-  }, [step, navigate])
+  }, [isDone, navigate])
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim()
-    if (!trimmed || isTyping || step >= STEPS.length) return
-    setMessages(prev => [...prev, { id: nextId(), sender: 'user', text: trimmed }])
+    if (!trimmed || isTyping || isDone) return
+    const newMsg = { id: nextId(), sender: 'user', text: trimmed }
+    setMessages(prev => [...prev, newMsg])
     setInput('')
     setIsTyping(true)
-    window.setTimeout(() => {
-      const nextStep = step + 1
-      setStep(nextStep)
-      if (nextStep < STEPS.length) {
-        setMessages(prev => [...prev, { id: nextId(), sender: 'bot', text: STEPS[nextStep].question }])
+
+    try {
+      // Build conversation history format for API
+      // Only include user roles as history technically, or both if needed, but API usually expects just user responses or full history
+      // We will send the whole history
+      const history = [...messages, newMsg]
+        .filter(m => m.id !== 'm-0') // skip generic greeting from client side
+        .map(m => ({
+          role: m.sender === 'user' ? 'user' : 'assistant',
+          content: m.text
+        }))
+
+      const res = await api.onboard('user_123', sessionId, history)
+      const data = res.data
+
+      setStep(prev => prev + 1)
+      setCompletionPct(data.completion_percentage || 0)
+
+      if (data.status === 'complete' || data.completion_percentage >= 100) {
+        setIsDone(true)
+        setMessages(prev => [...prev, { id: nextId(), sender: 'bot', text: data.next_question || "Perfect. Your Financial DNA profile has been calibrated. Redirecting you to your personalized dashboard now…" }])
       } else {
-        setMessages(prev => [...prev, { id: nextId(), sender: 'bot', text: "Perfect. Your Financial DNA profile has been calibrated. Redirecting you to your personalized dashboard now…" }])
+        setMessages(prev => [...prev, { id: nextId(), sender: 'bot', text: data.next_question }])
       }
+    } catch (err) {
+      console.error(err)
+      setMessages(prev => [...prev, { id: nextId(), sender: 'bot', text: "Sorry, I had trouble connecting to the backend. Is it running?" }])
+    } finally {
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
   const onKeyDown = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() } }
-
-  const pct = Math.min(100, (step / STEPS.length) * 100)
-  const isDone = step >= STEPS.length
 
   return (
     <div className="min-h-screen w-full bg-[#0B0C10] flex flex-col items-center justify-center relative overflow-hidden">
@@ -98,36 +113,10 @@ export default function Onboard() {
           className="flex items-center w-full"
           style={{ marginBottom: 36 }}
         >
-          {STEPS.map((s, i) => {
-            const done = i < step
-            const active = i === step && !isDone
-            return (
-              <div key={s.label} className="flex items-center flex-1 last:flex-none">
-                <div className="flex flex-col items-center" style={{ gap: 8 }}>
-                  <div className={`flex items-center justify-center rounded-full border transition-all duration-300 ${
-                    done ? 'bg-[#45A29E] border-[#45A29E]'
-                    : active ? 'bg-[#45A29E]/10 border-[#45A29E]/60'
-                    : 'bg-white/[0.04] border-white/10'
-                  }`} style={{ height: 32, width: 32 }}>
-                    {done
-                      ? <Check className="text-black" style={{ height: 16, width: 16 }} strokeWidth={2.5} />
-                      : <span className={`font-bold ${active ? 'text-[#45A29E]' : 'text-white/25'}`} style={{ fontSize: 12 }}>{i + 1}</span>
-                    }
-                  </div>
-                  <span className={`font-semibold hidden sm:block transition-colors text-center ${
-                    done ? 'text-[#45A29E]' : active ? 'text-white/80' : 'text-white/20'
-                  }`} style={{ fontSize: 11 }}>{s.label}</span>
-                </div>
-                {i < STEPS.length - 1 && (
-                  <div className="flex-1" style={{
-                    height: 1, margin: '0 12px', marginTop: -16,
-                    background: i < step ? '#45A29E' : 'rgba(255,255,255,0.08)',
-                    transition: 'background 0.4s ease',
-                  }} />
-                )}
-              </div>
-            )
-          })}
+          {/* Note: In API mode, STEPS length is dynamic. We show a generic progress bar now. */}
+          <div className="flex-1 rounded-full bg-white/[0.04] overflow-hidden border border-white/10" style={{ height: 8 }}>
+            <div className="h-full bg-[#45A29E] transition-all duration-700 ease-out" style={{ width: `${Math.max(5, completionPct)}%` }} />
+          </div>
         </motion.div>
 
         {/* Chat window */}
@@ -147,14 +136,14 @@ export default function Onboard() {
                 <span className={`relative inline-flex rounded-full ${isDone ? 'bg-emerald-400' : 'bg-[#45A29E]'}`} style={{ height: 8, width: 8 }} />
               </span>
               <span className="font-semibold uppercase text-[#94A3B8]" style={{ fontSize: 11, letterSpacing: '0.14em' }}>
-                {isDone ? 'Profile complete' : `Step ${Math.min(step + 1, STEPS.length)} of ${STEPS.length}`}
+                {isDone ? 'Profile complete' : `Gathering DNA`}
               </span>
             </div>
             <div className="flex items-center" style={{ gap: 14 }}>
               <div className="rounded-full bg-white/[0.06] overflow-hidden" style={{ width: 120, height: 6 }}>
-                <div className="h-full rounded-full bg-[#45A29E] transition-all duration-700 ease-out" style={{ width: `${pct}%` }} />
+                <div className="h-full rounded-full bg-[#45A29E] transition-all duration-700 ease-out" style={{ width: `${completionPct}%` }} />
               </div>
-              <span className="font-semibold text-[#45A29E] tabular-nums text-right" style={{ fontSize: 13, width: 36 }}>{Math.round(pct)}%</span>
+              <span className="font-semibold text-[#45A29E] tabular-nums text-right" style={{ fontSize: 13, width: 36 }}>{Math.round(completionPct)}%</span>
             </div>
           </div>
 

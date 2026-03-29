@@ -13,7 +13,10 @@ import {
   CalendarDays,
   BarChart3,
   ArrowRight,
+  Loader2,
 } from 'lucide-react'
+import { api } from '../services/api'
+import { useState } from 'react'
 
 function KpiCard({ icon: Icon, iconColor, iconBg, label, value, sub, badge, badgeColor }) {
   return (
@@ -100,6 +103,7 @@ const engines = [
 ]
 
 export default function DashboardPage() {
+  const [simulating, setSimulating] = useState(false)
   const score = 743
   const scoreMax = 1000
   const pct = (score / scoreMax) * 100
@@ -275,10 +279,36 @@ export default function DashboardPage() {
             </p>
           </div>
           <button type="button"
-            className="shrink-0 flex items-center gap-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-[15px] font-semibold transition-colors whitespace-nowrap"
+            onClick={async () => {
+              try {
+                setSimulating(true)
+                const res = await api.simulateIntervention('user_123', 15.0)
+                if (res.data?.whatsapp_sent) {
+                  alert("Simulation triggered! WhatsApp alert sent: " + JSON.stringify(res.data.intervention_message?.whatsapp_message))
+                } else {
+                  alert("Simulation triggered: " + JSON.stringify(res.data))
+                }
+              } catch (err) {
+                console.error(err)
+                alert("Failed to simulate. Ensure backend is running.")
+              } finally {
+                setSimulating(false)
+              }
+            }}
+            disabled={simulating}
+            className={`shrink-0 flex items-center gap-3 rounded-xl text-white text-[15px] font-semibold transition-colors whitespace-nowrap ${simulating ? 'bg-rose-600/50 cursor-not-allowed' : 'bg-rose-600 hover:bg-rose-500'}`}
             style={{ padding: '16px 28px' }}>
-            Simulate drawdown
-            <ArrowRight className="h-4 w-4" />
+            {simulating ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" />
+                Triggering...
+              </>
+            ) : (
+              <>
+                Simulate drawdown
+                <ArrowRight className="h-4 w-4" />
+              </>
+            )}
           </button>
         </div>
 
